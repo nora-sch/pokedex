@@ -1,9 +1,11 @@
+import React from "react";
 import { useState } from "react";
 import MyTitle from "./components/MyTitle";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import PokemonCard from "./components/PokemonCard";
+import NavBar from "./components/NavBar";
 
 function App() {
   const pokemonList = [
@@ -33,23 +35,28 @@ function App() {
   ];
   const [pokemonIndex, setPokemonIndex] = useState(0);
   const handleClickPrevious = () => {
-    if(pokemonIndex>0)
-    setPokemonIndex(pokemonIndex - 1);
- 
+    if (pokemonIndex > 0) setPokemonIndex(pokemonIndex - 1);
   };
   const handleClickNext = () => {
-    pokemonIndex<pokemonList.length-1? setPokemonIndex(pokemonIndex + 1):setPokemonIndex(pokemonIndex);
+    pokemonIndex < pokemonList.length - 1
+      ? setPokemonIndex(pokemonIndex + 1)
+      : setPokemonIndex(pokemonIndex);
   };
   return (
     <>
       <div>
+        <NavBar index = {pokemonIndex} listLength={pokemonList.length} updateIndex = {setPokemonIndex}/>
         <PokemonCard pokemon={pokemonList[pokemonIndex]} />
-       {pokemonIndex>0 ? <button className="previous" onClick={handleClickPrevious}>
-          Previous
-        </button> : ''}
-        {pokemonIndex<pokemonList.length-1 ? <button className="next" onClick={handleClickNext}>
-          Next
-        </button>:''}
+        {pokemonIndex > 0 ? (
+          <button onClick={handleClickPrevious}>Previous</button>
+        ) : (
+          ""
+        )}
+        {pokemonIndex < pokemonList.length - 1 ? (
+          <button onClick={handleClickNext}>Next</button>
+        ) : (
+          ""
+        )}
       </div>
     </>
   );
