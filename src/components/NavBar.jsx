@@ -1,11 +1,15 @@
-function NavBar({ index, listLength, updateIndex}) {
+import React from "react";
+import { useEffect } from "react";
+
+function NavBar({ index, list, updateIndex }) {
+  useEffect(() => {
+    if (list[index].name === "pikachu") alert("pika pikachu !!!");
+  }, [index]);
   const handleChangePrevious = () => {
     if (index > 0) updateIndex(index - 1);
   };
   const handleChangeNext = () => {
-    index < listLength - 1
-      ? updateIndex(index + 1)
-      : updateIndex(index);
+    index < list.length - 1 ? updateIndex(index + 1) : updateIndex(index);
   };
   return (
     <nav className="navigation-bar">

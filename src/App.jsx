@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MyTitle from "./components/MyTitle";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
@@ -8,6 +8,9 @@ import PokemonCard from "./components/PokemonCard";
 import NavBar from "./components/NavBar";
 
 function App() {
+  useEffect(() => {
+    alert("hello pokemon trainer :)");
+  }, []);
   const pokemonList = [
     {
       name: "bulbasaur",
@@ -33,6 +36,9 @@ function App() {
       name: "mew",
     },
   ];
+
+
+
   const [pokemonIndex, setPokemonIndex] = useState(0);
   const handleClickPrevious = () => {
     if (pokemonIndex > 0) setPokemonIndex(pokemonIndex - 1);
@@ -45,7 +51,11 @@ function App() {
   return (
     <>
       <div>
-        <NavBar index = {pokemonIndex} listLength={pokemonList.length} updateIndex = {setPokemonIndex}/>
+        <NavBar
+          index={pokemonIndex}
+          list={pokemonList}
+          updateIndex={setPokemonIndex}
+        />
         <PokemonCard pokemon={pokemonList[pokemonIndex]} />
         {pokemonIndex > 0 ? (
           <button onClick={handleClickPrevious}>Previous</button>
